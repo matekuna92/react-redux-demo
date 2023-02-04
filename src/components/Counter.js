@@ -9,7 +9,7 @@ const Counter = () => {
   const counter = useSelector(state => state.counter);    // store the store's counter in a variable
 
   const incrementHandler = () => {
-    dispatch({ type: 'increment',});
+    dispatch({ type: 'increment' });
   }
 
   const decrementHandler = () => {
