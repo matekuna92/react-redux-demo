@@ -7,6 +7,7 @@ const Counter = () => {
   // get access to date managed by the store with this function
   // react-redux automatically set up a subscription to the redux store for this component, no manual need
   const counter = useSelector(state => state.counter);    // store the store's counter in a variable
+  const show = useSelector(state => state.showCounter);
 
   const incrementHandler = () => {
     dispatch({ type: 'increment' });
@@ -20,12 +21,14 @@ const Counter = () => {
     dispatch({ type: 'decrement' });
   }
 
-  const toggleCounterHandler = () => {};
+  const toggleCounterHandler = () => {
+    dispatch({ type: 'toggle' });
+  };
 
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}>{counter}</div>
+      {show && <div className={classes.value}>{counter}</div>}
       <button onClick={incrementHandler}>Increment</button>
       <button onClick={increaseHandler}>Increment by 10</button>
       <button onClick={decrementHandler}>Decrement</button>
