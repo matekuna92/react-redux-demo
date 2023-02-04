@@ -1,10 +1,16 @@
+import { Fragment } from 'react';
+
 import Counter from './components/Counter';
+import CounterClassBasedRedux from "./components/CounterClassBasedRedux";
 
 
 function App() {
-  return (
-    <Counter />
-  );
+    return (
+        <Fragment>
+            <Counter />
+            <CounterClassBasedRedux />
+        </Fragment>
+    );
 }
 
 export default App;
