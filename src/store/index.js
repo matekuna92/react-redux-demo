@@ -1,7 +1,41 @@
 import { createStore } from 'redux';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const INCREMENT = 'increment';
 const initialState = { counter: 0, showCounter: true };
+
+// creating a slice of global state
+const counterSlice = createSlice({
+    name: 'counter',
+    initialState: initialState,
+    reducers: {
+        increment(state) {
+            return {
+                counter: state.counter + 1
+            }
+            // state.counter++;     mutating the state is BAD, but redux toolit uses an internal package
+            // in the background which translates this code to immutable code, so this line here can be used with redux toolkit, no need to return object, as it was required without slices! *
+        },
+        decrement(state) {
+            return {
+                counter: state.counter - 1
+            }
+            // * state.counter--;
+        },
+        increase(state, action) {
+            return {
+                counter: state.counter + action.amount
+            }
+            // * state.counter = state.counter + action.amount
+        },
+        toggle(state) {
+            return {
+                showCounter: !state.showCounter
+            }
+            // * state.showCounter = !state.showCounter;
+        }
+    }
+});
 
 const counterReducer = (state = initialState, action) => {     // default 0 value for first run
     if(action.type === INCREMENT) {
@@ -38,6 +72,7 @@ const counterReducer = (state = initialState, action) => {     // default 0 valu
 const store = createStore(counterReducer);
 console.log('store:', store.getState());
 
+export const { increment, decrement, increase, toggle } = counterSlice.actions;
 export default store;
 
 /* const subscriber = () => {
