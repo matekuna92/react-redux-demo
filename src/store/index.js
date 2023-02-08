@@ -1,5 +1,5 @@
-import { createStore } from 'redux';
-import { createSlice } from '@reduxjs/toolkit';
+//import { createStore } from 'redux';
+import { createSlice, configureStore } from '@reduxjs/toolkit';
 
 export const INCREMENT = 'increment';
 const initialState = { counter: 0, showCounter: true };
@@ -8,7 +8,7 @@ const initialState = { counter: 0, showCounter: true };
 const counterSlice = createSlice({
     name: 'counter',
     initialState: initialState,
-    reducers: {
+    reducer: {
         increment(state) {
             return {
                 counter: state.counter + 1
@@ -24,7 +24,7 @@ const counterSlice = createSlice({
         },
         increase(state, action) {
             return {
-                counter: state.counter + action.amount
+                counter: state.counter + action.payload
             }
             // * state.counter = state.counter + action.amount
         },
@@ -37,42 +37,47 @@ const counterSlice = createSlice({
     }
 });
 
-const counterReducer = (state = initialState, action) => {     // default 0 value for first run
-    if(action.type === INCREMENT) {
-        return {
-            counter: state.counter + 1,
-            showCounter: state.showCounter
-        }
-    }
-    
-    if(action.type === 'increase') {
-        return {
-            counter: state.counter + action.amount,
-            showCounter: state.showCounter
-        }
-    }
-    
-    if(action.type === 'decrement') {
-        return {
-            counter: state.counter - 1,
-            showCounter: state.showCounter
-        }
-    }
+//const counterReducer = (state = initialState, action) => {     // default 0 value for first run
+//    if(action.type === INCREMENT) {
+//        return {
+//            counter: state.counter + 1,
+//            showCounter: state.showCounter
+//        }
+//    }
+//
+//    if(action.type === 'increase') {
+//        return {
+//            counter: state.counter + action.amount,
+//            showCounter: state.showCounter
+//        }
+//    }
+//
+//    if(action.type === 'decrement') {
+//        return {
+//            counter: state.counter - 1,
+//            showCounter: state.showCounter
+//        }
+//    }
+//
+//    if(action.type === 'toggle') {
+//        return {
+//            counter: state.counter,
+//            showCounter: !state.showCounter
+//        }
+//    }
+//
+//    return state;
+//}
 
-    if(action.type === 'toggle') {
-        return {
-            counter: state.counter,
-            showCounter: !state.showCounter
-        }
-    }
-
-    return state;
-}
-
-const store = createStore(counterReducer);
+//const store = createStore(counterReducer);
+const store = configureStore({
+    // can pass multiple reducers with unique keys in an object, then configureStore will merge all reducerst into one, if we would have more than 1 reducers
+    //reducer: { counter: counterSlice.reducers }
+    reducer: counterSlice.reducer
+});
 console.log('store:', store.getState());
 
-export const { increment, decrement, increase, toggle } = counterSlice.actions;
+export const counterActions = counterSlice.actions;
 export default store;
 
 /* const subscriber = () => {

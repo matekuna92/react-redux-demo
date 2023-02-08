@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 
 import classes from './Counter.module.css';
-import { INCREMENT } from '../store/index';
+import { counterActions } from '../store/index';
 
 const Counter = () => {
   const dispatch = useDispatch();
@@ -11,19 +11,19 @@ const Counter = () => {
   const show = useSelector(state => state.showCounter);
 
   const incrementHandler = () => {
-      dispatch({ type: INCREMENT });
+      dispatch(counterActions.increment());
   }
     
   const increaseHandler = () => {
-    dispatch({ type: 'increase', amount: 10 });
+      dispatch(counterActions.increase({ payload: 10 }));   // redux toolkit payload name is built-n, custom name cant be used
   }
 
   const decrementHandler = () => {
-    dispatch({ type: 'decrement' });
+      dispatch(counterActions.decrement());
   }
 
   const toggleCounterHandler = () => {
-    dispatch({ type: 'toggle' });
+      dispatch(counterActions.toggle());
   };
 
   return (
