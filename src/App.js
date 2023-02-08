@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 
 import Counter from './components/Counter';
 import CounterClassBasedRedux from "./components/CounterClassBasedRedux";

@@ -8,31 +8,31 @@ const initialState = { counter: 0, showCounter: true };
 const counterSlice = createSlice({
     name: 'counter',
     initialState: initialState,
-    reducer: {
+    reducers: {
         increment(state) {
-            return {
+            /*return {
                 counter: state.counter + 1
-            }
-            // state.counter++;     mutating the state is BAD, but redux toolit uses an internal package
+            }*/
+             state.counter++;    // mutating the state is BAD, but redux toolit uses an internal package
             // in the background which translates this code to immutable code, so this line here can be used with redux toolkit, no need to return object, as it was required without slices! *
         },
         decrement(state) {
-            return {
+            /*return {
                 counter: state.counter - 1
-            }
-            // * state.counter--;
+            }*/
+            state.counter--;
         },
         increase(state, action) {
-            return {
+            /*return {
                 counter: state.counter + action.payload
-            }
-            // * state.counter = state.counter + action.amount
+            }*/
+            state.counter = state.counter + action.amount
         },
         toggle(state) {
-            return {
+            /*return {
                 showCounter: !state.showCounter
-            }
-            // * state.showCounter = !state.showCounter;
+            }*/
+            state.showCounter = !state.showCounter;
         }
     }
 });
