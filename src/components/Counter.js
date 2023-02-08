@@ -16,7 +16,8 @@ const Counter = () => {
   }
     
   const increaseHandler = () => {
-      dispatch(counterActions.increase({ payload: 10 }));   // redux toolkit payload name is built-n, custom name cant be used
+      dispatch(counterActions.increase(10));   // redux toolkit payload name is built-n, custom name cant be used,
+                                              // have to be referred as action.payload in the store
   }
 
   const decrementHandler = () => {
