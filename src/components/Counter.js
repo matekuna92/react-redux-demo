@@ -8,7 +8,8 @@ const Counter = () => {
   const dispatch = useDispatch();
   // get access to date managed by the store with this function
   // react-redux automatically set up a subscription to the redux store for this component, no manual need
-  const counter = useSelector(state => state.counter);    // store the store's counter in a variable
+    // 
+  const counter = useSelector(state => state.counter.counter);    // store the store's counter in a variable
   const show = useSelector(state => state.showCounter);
 
   const incrementHandler = () => {

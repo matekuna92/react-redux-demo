@@ -2,13 +2,14 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
 
 export const INCREMENT = 'increment';
-const initialState = { counter: 0, showCounter: true };
+const initialCounterState = { counter: 0, showCounter: true };
+const initialAuthState = { isAuthenticated: false };
 
 // creating a slice of global state
 const counterSlice = createSlice({
     name: 'counter',
-    initialState: initialState,
-    reducers: {
+    initialState: initialCounterState,
+    reducer: {
         increment(state) {
             /*return {
                 counter: state.counter + 1
@@ -33,6 +34,20 @@ const counterSlice = createSlice({
                 showCounter: !state.showCounter
             }*/
             state.showCounter = !state.showCounter;
+        }
+    }
+});
+
+// auth slice
+const authSlice = createSlice({
+    name: 'auth',
+    initialAuthState,
+    reducer: {
+        login(state) {
+            state.isAuthenticated = true;
+        },
+        logout(state) {
+            state.isAuthenticated = false;
         }
     }
 });
@@ -72,12 +87,14 @@ const counterSlice = createSlice({
 //const store = createStore(counterReducer);
 const store = configureStore({
     // can pass multiple reducers with unique keys in an object, then configureStore will merge all reducerst into one, if we would have more than 1 reducers
-    //reducer: { counter: counterSlice.reducers }
-    reducer: counterSlice.reducer
+    // now with multiple reducers the way we access state.counter in Counter.js changes to: state.counter.counter
+    // it references to the store's reducer's counter, which has an initialState with the property called counter
+    reducer: { counter: counterSlice.reducer, auth: authSlice.reducer }
 });
 console.log('store:', store.getState());
 
 export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions;
 export default store;
 
 /* const subscriber = () => {
