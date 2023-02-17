@@ -10,7 +10,7 @@ const Counter = () => {
   // react-redux automatically set up a subscription to the redux store for this component, no manual need
     // 
   const counter = useSelector(state => state.counter.counter);    // store the store's counter in a variable
-  const show = useSelector(state => state.showCounter);
+  const show = useSelector(state => state.counter.showCounter);
 
   const incrementHandler = () => {
       dispatch(counterActions.increment());

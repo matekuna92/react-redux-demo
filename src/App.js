@@ -16,7 +16,7 @@ function App() {
             {!isAuth && <Auth />}
             {isAuth && <UserProfile />}
             <Counter />
-            <CounterClassBasedRedux />
+            {/* <CounterClassBasedRedux /> */}
         </Fragment>
     );
 }
